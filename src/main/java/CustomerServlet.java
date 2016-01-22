@@ -1,5 +1,3 @@
-package org.smart4j.charpter2.controller;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -13,14 +11,13 @@ import org.smart4j.charpter2.model.Customer;
 import org.smart4j.charpter2.service.CustomerService;
 
 /**
- * 创建客户
- * 
+ * 查询客户列表
  * @author JTMRengl
- *
+ * 2016-01-22
  */
-@WebServlet("/customer_create")
-public class CustomerCreateServlet extends HttpServlet {
-	
+@WebServlet("/customer")
+public class CustomerServlet extends HttpServlet {
+
 	private CustomerService customerService;
 	
 	@Override
@@ -33,7 +30,10 @@ public class CustomerCreateServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//TODO
+		
+		List<Customer> customerList = customerService.getCustomerList();
+		req.setAttribute("customerList", customerList);
+		req.getRequestDispatcher("/view/customer.jsp").forward(req, resp);
 	}
 
 	/**
